@@ -4,7 +4,7 @@ import bhopal from "@/assets/project-bhopal.jpg";
 import { MapPin } from "lucide-react";
 
 const projects = [
-  { img: mp, name: "Wavelength Residency MP", location: "Indore, Madhya Pradesh", status: "Active", scope: "G+12 Residential Tower · 84 units" },
+  { img: mp, name: "Wavelength Residency MP", location: "Indore, Ujjain Madhya Pradesh", status: "Active", scope: "G+12 Residential Tower · 84 units" },
   { img: dholera, name: "Dholera Smart City Block A", location: "Dholera SIR, Gujarat", status: "Active", scope: "Township civil works · 18 acres" },
   { img: bhopal, name: "Bhopal Commercial Tower", location: "Bhopal, Madhya Pradesh", status: "Planning", scope: "G+8 Commercial · 1.2 lakh sqft" },
 ];

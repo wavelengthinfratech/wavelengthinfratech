@@ -15,7 +15,7 @@ export const PortfolioHero = () => {
           <div className="lg:col-span-7 animate-fade-up">
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-xs font-mono uppercase tracking-wider text-primary mb-6">
               <span className="size-1.5 rounded-full bg-primary animate-pulse" />
-              Wavelength Infratech · MP &amp; Dholera
+              WAVELENGTH INFRATECH · BY DEVENDASINGH RATHORE DHANIYAKHEDI
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6">
               Building tomorrow's{" "}

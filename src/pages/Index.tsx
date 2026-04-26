@@ -10,7 +10,7 @@ import { useEffect } from "react";
 const Index = () => {
   useEffect(() => {
     document.title = "Wavelength Infratech — Civil Construction, Design & Planning";
-    const desc = "Wavelength Infratech: civil construction, in-house design studio, elevation and planning across MP and Dholera, powered by an internal ConTech ERP.";
+    const desc = "Wavelength Infratech: civil construction, in-house design studio, elevation and planning across MP and Dholera, powered by an internal ConTech ERP. Reach us at wavelengthinfratech@gmail.com.";
     let meta = document.querySelector('meta[name="description"]');
     if (!meta) {
       meta = document.createElement("meta");
