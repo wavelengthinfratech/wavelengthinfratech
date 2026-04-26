@@ -37,8 +37,8 @@ export const PortfolioHero = () => {
               </Button>
             </div>
             <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2"><Building2 className="size-4 text-primary" /> 10+ active projects</div>
-              <div className="flex items-center gap-2"><MapPin className="size-4 text-primary" /> MP · Gujarat · Dholera SIR</div>
+              <div className="flex items-center gap-2"><Building2 className="size-4 text-primary" />{"\n"}</div>
+              <div className="flex items-center gap-2"><MapPin className="size-4 text-primary" />{"\n"}</div>
             </div>
           </div>
 
