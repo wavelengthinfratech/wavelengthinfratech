@@ -1,6 +1,7 @@
 import { PortfolioHeader } from "@/components/site/PortfolioHeader";
 import { PortfolioHero } from "@/components/site/PortfolioHero";
 import { ServicesSection } from "@/components/site/ServicesSection";
+import { ProductsSection } from "@/components/site/ProductsSection";
 import { ProjectsSection } from "@/components/site/ProjectsSection";
 import { AboutSection } from "@/components/site/AboutSection";
 import { ContactSection } from "@/components/site/ContactSection";
@@ -25,10 +26,11 @@ const Index = () => {
     <main className="min-h-screen bg-background text-foreground">
       <PortfolioHeader />
       <PortfolioHero />
+      <SocialSection />
       <ServicesSection />
+      <ProductsSection />
       <ProjectsSection />
       <AboutSection />
-      <SocialSection />
       <ContactSection />
       <PortfolioFooter />
     </main>
