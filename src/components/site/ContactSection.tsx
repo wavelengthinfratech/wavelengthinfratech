@@ -18,9 +18,9 @@ export const ContactSection = () => {
 
           <div className="grid sm:grid-cols-3 gap-4 mb-10">
             {[
-              { icon: Mail, label: "Email", value: "info@wavelengthinfratech.com" },
-              { icon: Phone, label: "Phone", value: "+91 98XXX XXXXX" },
-              { icon: MapPin, label: "Office", value: "Indore, Madhya Pradesh" },
+              { icon: Mail, label: "Email", value: "wavelengthinfratech@gmail.com" },
+              { icon: Phone, label: "Phone", value: "+91 9424810159" },
+              { icon: MapPin, label: "REACH LOCATION", value: "Indore, Ujjain Madhya Pradesh" },
             ].map((c) => (
               <div key={c.label} className="surface-card rounded-2xl p-6">
                 <div className="size-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
@@ -33,7 +33,7 @@ export const ContactSection = () => {
           </div>
 
           <Button asChild variant="hero" size="xl">
-            <a href="mailto:info@wavelengthinfratech.com">Send us a message</a>
+            <a href="mailto:wavelengthinfratech@gmail.com">Send us a message</a>
           </Button>
         </div>
       </div>
