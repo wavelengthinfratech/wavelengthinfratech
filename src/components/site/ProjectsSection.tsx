@@ -15,12 +15,12 @@ export const ProjectsSection = () => {
       <div className="container">
         <div className="max-w-2xl mb-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 text-xs font-mono uppercase tracking-wider text-muted-foreground mb-4">
-            <span className="size-1.5 rounded-full bg-primary" /> Active projects
+            <span className="size-1.5 rounded-full bg-primary" />
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            Sites we're <span className="text-gradient-primary">running right now.</span>
+            {"\n"}
           </h2>
-          <p className="text-lg text-muted-foreground">A live snapshot of work in MP and Dholera.</p>
+          <p className="text-lg text-muted-foreground">{"\n"}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
