@@ -31,7 +31,7 @@ export const ProjectsSection = () => {
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`text-xs font-mono uppercase ${p.status === "Active" ? "text-[hsl(var(--success))]" : "text-secondary"}`}>● {p.status}</span>
+                  <span className={`text-xs font-mono uppercase ${p.status === "Active" ? "text-[hsl(var(--success))]" : "text-secondary"}`}>{"\n"}</span>
                 </div>
                 <h3 className="text-xl font-bold mb-2">{p.name}</h3>
                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-2">
