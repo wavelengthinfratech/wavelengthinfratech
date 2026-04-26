@@ -4,9 +4,9 @@ import bhopal from "@/assets/project-bhopal.jpg";
 import { MapPin } from "lucide-react";
 
 const projects = [
-  { img: mp, name: "Wavelength Residency MP", location: "Indore, Ujjain Madhya Pradesh", status: "Active", scope: "G+12 Residential Tower · 84 units" },
-  { img: dholera, name: "Dholera Smart City Block A", location: "Dholera SIR, Gujarat", status: "Active", scope: "Township civil works · 18 acres" },
-  { img: bhopal, name: "Bhopal Commercial Tower", location: "Bhopal, Madhya Pradesh", status: "Planning", scope: "G+8 Commercial · 1.2 lakh sqft" },
+  { img: mp, name: "\n", location: "\n", status: "Active", scope: "\n" },
+  { img: dholera, name: "\n", location: "\n", status: "Active", scope: "\n" },
+  { img: bhopal, name: "\n", location: "\n", status: "Planning", scope: "\n" },
 ];
 
 export const ProjectsSection = () => {
@@ -15,12 +15,12 @@ export const ProjectsSection = () => {
       <div className="container">
         <div className="max-w-2xl mb-16">
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-3 py-1 text-xs font-mono uppercase tracking-wider text-muted-foreground mb-4">
-            <span className="size-1.5 rounded-full bg-primary" /> Active projects
+            <span className="size-1.5 rounded-full bg-primary" />
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-            Sites we're <span className="text-gradient-primary">running right now.</span>
+            {"\n"}
           </h2>
-          <p className="text-lg text-muted-foreground">A live snapshot of work in MP and Dholera.</p>
+          <p className="text-lg text-muted-foreground">{"\n"}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -31,7 +31,7 @@ export const ProjectsSection = () => {
               </div>
               <div className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className={`text-xs font-mono uppercase ${p.status === "Active" ? "text-[hsl(var(--success))]" : "text-secondary"}`}>● {p.status}</span>
+                  <span className={`text-xs font-mono uppercase ${p.status === "Active" ? "text-[hsl(var(--success))]" : "text-secondary"}`}>{"\n"}</span>
                 </div>
                 <h3 className="text-xl font-bold mb-2">{p.name}</h3>
                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground mb-2">
