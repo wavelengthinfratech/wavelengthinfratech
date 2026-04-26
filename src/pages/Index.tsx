@@ -4,6 +4,7 @@ import { ServicesSection } from "@/components/site/ServicesSection";
 import { ProjectsSection } from "@/components/site/ProjectsSection";
 import { AboutSection } from "@/components/site/AboutSection";
 import { ContactSection } from "@/components/site/ContactSection";
+import { SocialSection } from "@/components/site/SocialSection";
 import { PortfolioFooter } from "@/components/site/PortfolioFooter";
 import { useEffect } from "react";
 
@@ -27,6 +28,7 @@ const Index = () => {
       <ServicesSection />
       <ProjectsSection />
       <AboutSection />
+      <SocialSection />
       <ContactSection />
       <PortfolioFooter />
     </main>
