@@ -15,7 +15,7 @@ const ProjectsAdmin = () => {
   });
 
   return (
-    <RoleGate allow={["main_admin"]}>
+    <RoleGate allow={["super_admin", "construction_head", "interior_head"]}>
       <PortalShell>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Projects</h1>

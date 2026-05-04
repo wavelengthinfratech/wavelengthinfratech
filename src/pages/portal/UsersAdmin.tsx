@@ -7,7 +7,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "sonner";
 import type { AppRole } from "@/hooks/useAuth";
 
-const ROLES: AppRole[] = ["main_admin", "contractor", "subcontractor", "mistri", "labour"];
+const ROLES: AppRole[] = [
+  "super_admin",
+  "construction_head",
+  "interior_head",
+  "field_manager",
+  "accounts_manager",
+  "material_manager",
+  "hr_manager",
+  "site_supervisor",
+  "viewer",
+];
 
 const UsersAdmin = () => {
   const qc = useQueryClient();
@@ -42,7 +52,7 @@ const UsersAdmin = () => {
   });
 
   return (
-    <RoleGate allow={["main_admin"]}>
+    <RoleGate allow={["super_admin", "hr_manager"]}>
       <PortalShell>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Users &amp; Roles</h1>
@@ -72,7 +82,7 @@ const UsersAdmin = () => {
                       <td className="py-3 pr-4 text-muted-foreground">{u.phone ?? "—"}</td>
                       <td className="py-3 pr-4 text-muted-foreground">{u.assigned_site ?? "—"}</td>
                       <td className="py-3 pr-4">
-                        <Select value={u.role ?? "labour"} onValueChange={(v) => setRole.mutate({ userId: u.id, role: v as AppRole })}>
+                        <Select value={u.role ?? "viewer"} onValueChange={(v) => setRole.mutate({ userId: u.id, role: v as AppRole })}>
                           <SelectTrigger><SelectValue /></SelectTrigger>
                           <SelectContent>
                             {ROLES.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
