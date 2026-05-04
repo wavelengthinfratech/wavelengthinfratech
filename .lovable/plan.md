@@ -1,46 +1,39 @@
 ## Goal
 
-1. Move the **"Follow our build journey"** (Social) section higher up — to position #2, right after the Hero.
-2. Add a new product line to the site: **Pavers, Boundary Walls, Chairs (precast), and Poles** — items the business manufactures/sells.
+Create 9 ready-to-use demo login accounts — one for each role — so you can test the portal immediately.
 
-## Changes
+## Demo credentials (proposed)
 
-### 1. Reorder homepage sections (`src/pages/Index.tsx`)
+All accounts share the same password for easy demo: **`Demo@2026`**
 
-New section order:
-```text
-1. PortfolioHero
-2. SocialSection         ← moved up to #2
-3. ServicesSection
-4. ProductsSection       ← new (pavers, walls, chairs, poles)
-5. ProjectsSection
-6. AboutSection
-7. ContactSection
-8. PortfolioFooter
-```
+| # | Email | Role |
+|---|---|---|
+| 1 | `superadmin@demo.wavelength.in` | Super Admin |
+| 2 | `construction@demo.wavelength.in` | Construction Head |
+| 3 | `interior@demo.wavelength.in` | Interior Head |
+| 4 | `field@demo.wavelength.in` | Field Manager |
+| 5 | `accounts@demo.wavelength.in` | Accounts Manager |
+| 6 | `material@demo.wavelength.in` | Material Manager |
+| 7 | `hr@demo.wavelength.in` | HR Manager |
+| 8 | `site@demo.wavelength.in` | Site Supervisor |
+| 9 | `viewer@demo.wavelength.in` | Viewer |
 
-### 2. Add a new "Products We Manufacture" section
+## How it will be built
 
-Create `src/components/site/ProductsSection.tsx` listing 4 products in a grid, each with an icon, title, and one-line description:
+1. Create one-time backend function `seed-demo-users` that:
+   - Uses admin privileges to create the 9 auth users with email pre-confirmed (no email verification needed)
+   - Skips any account that already exists (safe to re-run)
+   - Assigns the correct role in `user_roles` for each
+   - Sets `full_name` on each profile (e.g. "Demo Super Admin")
+2. Auto-run the function once on deploy and return a summary.
+3. After seeding, you can log in at `/auth` with any of the 9 emails + password above.
 
-- **Paver Blocks** — Interlocking pavers for driveways, walkways, parking lots.
-- **Boundary Walls** — Precast and cast-in-situ compound walls for plots, factories, farms.
-- **RCC Chairs** — Precast concrete chairs/spacers for reinforcement work.
-- **Cement Poles** — Fencing and electric poles in standard heights.
+## Notes / risks
 
-Styling will match existing `surface-card` pattern used in `ServicesSection` so it feels native.
-
-### 3. Optional small nav addition
-
-Add a "Products" link in `PortfolioHeader` so users can jump to the new section. (Skip if header is already crowded.)
-
-## Technical notes
-
-- No backend or schema changes.
-- Pure presentational reorder + one new component file.
-- Icons from `lucide-react` (e.g. `Grid3x3`, `Fence`, `Armchair`, `Lightbulb` — final pick during build).
-- Content is in English with industry-standard product names; let me know if you want Hindi labels alongside.
+- These are real backend accounts with real privileges — anyone with the password can sign in. Recommend changing the password or deleting demo accounts before going to production.
+- The Super Admin demo can edit/delete data, including pricing rates. Use the Viewer account if you just want to look around safely.
+- Existing real users are untouched.
 
 ## Open question
 
-Should the Social section remain its current full size at position #2, or should I make it a bit more compact since it'll be one of the first things visitors see? I'll keep it full-size by default unless you say otherwise.
+Are these emails + password OK, or do you want different ones (e.g. your own email pattern, stronger password)? If yes to defaults, I'll seed them on approval.
