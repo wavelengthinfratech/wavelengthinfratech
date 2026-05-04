@@ -15,7 +15,7 @@ const SubcontractorDashboard = () => {
   };
 
   return (
-    <RoleGate allow={["field_manager"]}>
+    <RoleGate allow={["super_admin", "field_manager"]}>
       <PortalShell>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Subcontractor Dashboard</h1>

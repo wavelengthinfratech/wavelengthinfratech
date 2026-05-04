@@ -5,7 +5,7 @@ import { Calendar, Wallet } from "lucide-react";
 
 const LabourDashboard = () => {
   return (
-    <RoleGate allow={["viewer"]}>
+    <RoleGate allow={["super_admin", "viewer"]}>
       <PortalShell>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">My Dashboard</h1>

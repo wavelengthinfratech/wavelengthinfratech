@@ -21,7 +21,7 @@ const MistriDashboard = () => {
   };
 
   return (
-    <RoleGate allow={["site_supervisor"]}>
+    <RoleGate allow={["super_admin", "site_supervisor"]}>
       <PortalShell>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Mistri Dashboard</h1>

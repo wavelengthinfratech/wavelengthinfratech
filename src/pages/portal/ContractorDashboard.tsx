@@ -7,7 +7,7 @@ import { ClipboardCheck, Package, Users, Calculator } from "lucide-react";
 
 const ContractorDashboard = () => {
   return (
-    <RoleGate allow={["construction_head"]}>
+    <RoleGate allow={["super_admin", "construction_head", "interior_head", "accounts_manager"]}>
       <PortalShell>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Contractor Dashboard</h1>
