@@ -44,10 +44,13 @@ const App = () => (
             <Route path="/portal/admin/pricing" element={<PricingMaster />} />
             <Route path="/portal/admin/users" element={<UsersAdmin />} />
             <Route path="/portal/admin/projects" element={<ProjectsAdmin />} />
-            <Route path="/portal/contractor" element={<ContractorDashboard />} />
-            <Route path="/portal/subcontractor" element={<SubcontractorDashboard />} />
-            <Route path="/portal/mistri" element={<MistriDashboard />} />
-            <Route path="/portal/labour" element={<LabourDashboard />} />
+            {/* Role-specific dashboards (reusing existing components, repurposed) */}
+            <Route path="/portal/construction" element={<ContractorDashboard />} />
+            <Route path="/portal/interior" element={<ContractorDashboard />} />
+            <Route path="/portal/field" element={<SubcontractorDashboard />} />
+            <Route path="/portal/accounts" element={<ContractorDashboard />} />
+            <Route path="/portal/site" element={<MistriDashboard />} />
+            <Route path="/portal/viewer" element={<LabourDashboard />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
