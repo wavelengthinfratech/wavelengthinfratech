@@ -102,7 +102,7 @@ const PricingMaster = () => {
   });
 
   return (
-    <RoleGate allow={["main_admin"]}>
+    <RoleGate allow={["super_admin", "material_manager", "accounts_manager"]}>
       <PortalShell>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Pricing Master</h1>

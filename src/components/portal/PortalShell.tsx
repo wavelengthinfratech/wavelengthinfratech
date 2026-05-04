@@ -3,41 +3,59 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AppLogo } from "@/components/AppLogo";
 import { useAuth, roleLabel, AppRole } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { LogOut, LayoutDashboard, IndianRupee, Calculator, Users, Building2, ClipboardList, MapPin, Wallet, Hammer } from "lucide-react";
+import {
+  LogOut, LayoutDashboard, IndianRupee, Calculator, Users, Building2,
+  ClipboardList, MapPin, Wallet, Hammer, Sofa, FileText, UserCheck,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavItem = { to: string; label: string; icon: React.ComponentType<{ className?: string }> };
 
 const NAV_BY_ROLE: Record<AppRole, NavItem[]> = {
-  main_admin: [
+  super_admin: [
     { to: "/portal/admin", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/portal/admin/pricing", label: "Pricing Master", icon: IndianRupee },
+    { to: "/portal/admin/pricing", label: "Material Rates", icon: IndianRupee },
     { to: "/portal/admin/users", label: "Users & Roles", icon: Users },
     { to: "/portal/admin/projects", label: "Projects", icon: Building2 },
     { to: "/calculators/tiles", label: "Calculators", icon: Calculator },
   ],
-  contractor: [
-    { to: "/portal/contractor", label: "Dashboard", icon: LayoutDashboard },
+  construction_head: [
+    { to: "/portal/construction", label: "Dashboard", icon: LayoutDashboard },
+    { to: "/portal/admin/projects", label: "Projects", icon: Building2 },
     { to: "/calculators/tiles", label: "Calculators", icon: Calculator },
   ],
-  subcontractor: [
-    { to: "/portal/subcontractor", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/portal/subcontractor", label: "Attendance", icon: MapPin },
+  interior_head: [
+    { to: "/portal/interior", label: "Dashboard", icon: Sofa },
+    { to: "/portal/admin/projects", label: "Projects", icon: Building2 },
   ],
-  mistri: [
-    { to: "/portal/mistri", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/portal/mistri", label: "Material Log", icon: Hammer },
+  field_manager: [
+    { to: "/portal/field", label: "Dashboard", icon: LayoutDashboard },
+    { to: "/portal/field", label: "Leads & Visits", icon: MapPin },
   ],
-  labour: [
-    { to: "/portal/labour", label: "My Attendance", icon: ClipboardList },
-    { to: "/portal/labour", label: "Payments", icon: Wallet },
+  accounts_manager: [
+    { to: "/portal/accounts", label: "Dashboard", icon: Wallet },
+    { to: "/portal/admin/pricing", label: "Material Rates", icon: IndianRupee },
+  ],
+  material_manager: [
+    { to: "/portal/admin/pricing", label: "Material Rates", icon: IndianRupee },
+  ],
+  hr_manager: [
+    { to: "/portal/admin/users", label: "Users & Roles", icon: UserCheck },
+  ],
+  site_supervisor: [
+    { to: "/portal/site", label: "Dashboard", icon: LayoutDashboard },
+    { to: "/portal/site", label: "Site Updates", icon: Hammer },
+  ],
+  viewer: [
+    { to: "/portal/viewer", label: "Reports", icon: FileText },
+    { to: "/portal/viewer", label: "Activity", icon: ClipboardList },
   ],
 };
 
 export const PortalShell = ({ children }: { children: ReactNode }) => {
   const { user, role, signOut } = useAuth();
   const navigate = useNavigate();
-  const items = role ? NAV_BY_ROLE[role] : [];
+  const items = role ? NAV_BY_ROLE[role] ?? [] : [];
 
   const handleSignOut = async () => {
     await signOut();
@@ -46,7 +64,6 @@ export const PortalShell = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top bar — logo top-right always */}
       <header className="fixed top-0 inset-x-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-3">
@@ -67,7 +84,6 @@ export const PortalShell = ({ children }: { children: ReactNode }) => {
       </header>
 
       <div className="pt-16 flex">
-        {/* Sidebar */}
         <aside className="hidden lg:flex w-64 flex-col gap-1 fixed left-0 top-16 bottom-0 border-r border-border bg-card/50 p-4">
           <div className="text-xs font-mono uppercase text-muted-foreground px-3 py-2">Navigate</div>
           {items.map((it, i) => (
@@ -90,7 +106,6 @@ export const PortalShell = ({ children }: { children: ReactNode }) => {
           ))}
         </aside>
 
-        {/* Mobile horizontal nav */}
         <nav className="lg:hidden fixed top-16 inset-x-0 z-40 border-b border-border bg-background/90 backdrop-blur overflow-x-auto">
           <div className="flex gap-1 p-2 min-w-max">
             {items.map((it, i) => (

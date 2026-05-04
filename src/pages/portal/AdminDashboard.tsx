@@ -27,7 +27,7 @@ const AdminDashboard = () => {
   });
 
   return (
-    <RoleGate allow={["main_admin"]}>
+    <RoleGate allow={["super_admin"]}>
       <PortalShell>
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Admin Dashboard</h1>

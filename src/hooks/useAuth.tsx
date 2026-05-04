@@ -2,7 +2,16 @@ import { createContext, useContext, useEffect, useState, ReactNode } from "react
 import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
-export type AppRole = "main_admin" | "contractor" | "subcontractor" | "mistri" | "labour";
+export type AppRole =
+  | "super_admin"
+  | "construction_head"
+  | "interior_head"
+  | "field_manager"
+  | "accounts_manager"
+  | "material_manager"
+  | "hr_manager"
+  | "site_supervisor"
+  | "viewer";
 
 interface AuthContextValue {
   user: User | null;
@@ -20,7 +29,17 @@ const AuthContext = createContext<AuthContextValue>({
   signOut: async () => {},
 });
 
-const ROLE_PRIORITY: AppRole[] = ["main_admin", "contractor", "subcontractor", "mistri", "labour"];
+const ROLE_PRIORITY: AppRole[] = [
+  "super_admin",
+  "construction_head",
+  "interior_head",
+  "accounts_manager",
+  "material_manager",
+  "hr_manager",
+  "field_manager",
+  "site_supervisor",
+  "viewer",
+];
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
@@ -37,12 +56,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    // Listener first, then session check (recommended order)
     const { data: sub } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setUser(newSession?.user ?? null);
       if (newSession?.user) {
-        // Defer to avoid deadlock
         setTimeout(() => {
           fetchRole(newSession.user.id).then(setRole);
         }, 0);
@@ -83,22 +100,30 @@ export const useAuth = () => useContext(AuthContext);
 
 export const roleHomePath = (role: AppRole | null): string => {
   switch (role) {
-    case "main_admin": return "/portal/admin";
-    case "contractor": return "/portal/contractor";
-    case "subcontractor": return "/portal/subcontractor";
-    case "mistri": return "/portal/mistri";
-    case "labour": return "/portal/labour";
+    case "super_admin": return "/portal/admin";
+    case "construction_head": return "/portal/construction";
+    case "interior_head": return "/portal/interior";
+    case "field_manager": return "/portal/field";
+    case "accounts_manager": return "/portal/accounts";
+    case "material_manager": return "/portal/admin/pricing";
+    case "hr_manager": return "/portal/admin/users";
+    case "site_supervisor": return "/portal/site";
+    case "viewer": return "/portal/viewer";
     default: return "/portal";
   }
 };
 
 export const roleLabel = (role: AppRole | null): string => {
   switch (role) {
-    case "main_admin": return "Main Admin";
-    case "contractor": return "Contractor";
-    case "subcontractor": return "Subcontractor";
-    case "mistri": return "Mistri";
-    case "labour": return "Labour";
+    case "super_admin": return "Super Admin";
+    case "construction_head": return "Construction Head";
+    case "interior_head": return "Interior Head";
+    case "field_manager": return "Field Manager";
+    case "accounts_manager": return "Accounts Manager";
+    case "material_manager": return "Material Manager";
+    case "hr_manager": return "HR Manager";
+    case "site_supervisor": return "Site Supervisor";
+    case "viewer": return "Viewer";
     default: return "Member";
   }
 };
