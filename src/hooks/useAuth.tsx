@@ -11,6 +11,8 @@ export type AppRole =
   | "material_manager"
   | "hr_manager"
   | "site_supervisor"
+  | "telecaller_manager"
+  | "telecaller"
   | "viewer";
 
 interface AuthContextValue {
