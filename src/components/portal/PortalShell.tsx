@@ -5,7 +5,7 @@ import { useAuth, roleLabel, AppRole } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import {
   LogOut, LayoutDashboard, IndianRupee, Calculator, Users, Building2,
-  ClipboardList, MapPin, Wallet, Hammer, Sofa, FileText, UserCheck,
+  ClipboardList, MapPin, Wallet, Hammer, Sofa, FileText, UserCheck, Phone, Headphones,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -45,6 +45,13 @@ const NAV_BY_ROLE: Record<AppRole, NavItem[]> = {
   site_supervisor: [
     { to: "/portal/site", label: "Dashboard", icon: LayoutDashboard },
     { to: "/portal/site", label: "Site Updates", icon: Hammer },
+  ],
+  telecaller_manager: [
+    { to: "/portal/telecaller-manager", label: "Team Performance", icon: Headphones },
+    { to: "/portal/admin/projects", label: "Projects", icon: Building2 },
+  ],
+  telecaller: [
+    { to: "/portal/telecaller", label: "My Leads", icon: Phone },
   ],
   viewer: [
     { to: "/portal/viewer", label: "Reports", icon: FileText },
