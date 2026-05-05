@@ -11,6 +11,8 @@ export type AppRole =
   | "material_manager"
   | "hr_manager"
   | "site_supervisor"
+  | "telecaller_manager"
+  | "telecaller"
   | "viewer";
 
 interface AuthContextValue {
@@ -36,8 +38,10 @@ const ROLE_PRIORITY: AppRole[] = [
   "accounts_manager",
   "material_manager",
   "hr_manager",
+  "telecaller_manager",
   "field_manager",
   "site_supervisor",
+  "telecaller",
   "viewer",
 ];
 
@@ -108,6 +112,8 @@ export const roleHomePath = (role: AppRole | null): string => {
     case "material_manager": return "/portal/admin/pricing";
     case "hr_manager": return "/portal/admin/users";
     case "site_supervisor": return "/portal/site";
+    case "telecaller_manager": return "/portal/telecaller-manager";
+    case "telecaller": return "/portal/telecaller";
     case "viewer": return "/portal/viewer";
     default: return "/portal";
   }
@@ -123,6 +129,8 @@ export const roleLabel = (role: AppRole | null): string => {
     case "material_manager": return "Material Manager";
     case "hr_manager": return "HR Manager";
     case "site_supervisor": return "Site Supervisor";
+    case "telecaller_manager": return "Telecaller Manager";
+    case "telecaller": return "Telecaller";
     case "viewer": return "Viewer";
     default: return "Member";
   }

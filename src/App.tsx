@@ -13,6 +13,7 @@ import AdminDashboard from "./pages/portal/AdminDashboard.tsx";
 import PricingMaster from "./pages/portal/PricingMaster.tsx";
 import UsersAdmin from "./pages/portal/UsersAdmin.tsx";
 import ProjectsAdmin from "./pages/portal/ProjectsAdmin.tsx";
+import ProjectDetail from "./pages/portal/ProjectDetail.tsx";
 import ContractorDashboard from "./pages/portal/ContractorDashboard.tsx";
 import SubcontractorDashboard from "./pages/portal/SubcontractorDashboard.tsx";
 import MistriDashboard from "./pages/portal/MistriDashboard.tsx";
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/portal/admin/pricing" element={<PricingMaster />} />
             <Route path="/portal/admin/users" element={<UsersAdmin />} />
             <Route path="/portal/admin/projects" element={<ProjectsAdmin />} />
+            <Route path="/portal/admin/projects/:id" element={<ProjectDetail />} />
             {/* Role-specific dashboards (reusing existing components, repurposed) */}
             <Route path="/portal/construction" element={<ContractorDashboard />} />
             <Route path="/portal/interior" element={<ContractorDashboard />} />

@@ -185,30 +185,166 @@ export type Database = {
         }
         Relationships: []
       }
-      projects: {
+      project_rooms: {
         Row: {
-          budget: number | null
           created_at: string
+          doors: number | null
+          height_ft: number | null
           id: string
-          location: string | null
-          name: string
-          status: string
+          length_ft: number | null
+          notes: string | null
+          project_id: string
+          room_name: string
+          width_ft: number | null
+          windows: number | null
         }
         Insert: {
-          budget?: number | null
           created_at?: string
+          doors?: number | null
+          height_ft?: number | null
           id?: string
-          location?: string | null
-          name: string
-          status?: string
+          length_ft?: number | null
+          notes?: string | null
+          project_id: string
+          room_name: string
+          width_ft?: number | null
+          windows?: number | null
         }
         Update: {
-          budget?: number | null
+          created_at?: string
+          doors?: number | null
+          height_ft?: number | null
+          id?: string
+          length_ft?: number | null
+          notes?: string | null
+          project_id?: string
+          room_name?: string
+          width_ft?: number | null
+          windows?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_rooms_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_stages: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          name: string
+          notes: string | null
+          photo_url: string | null
+          progress: number
+          project_id: string
+          sort_order: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          completed_at?: string | null
           created_at?: string
           id?: string
+          name: string
+          notes?: string | null
+          photo_url?: string | null
+          progress?: number
+          project_id: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          photo_url?: string | null
+          progress?: number
+          project_id?: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_stages_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          address: string | null
+          area_sqft: number | null
+          assigned_supervisor: string | null
+          assigned_thekedar: string | null
+          budget: number | null
+          client_name: string | null
+          created_at: string
+          end_date: string | null
+          id: string
+          lead_id: string | null
+          location: string | null
+          name: string
+          property_type: string | null
+          start_date: string | null
+          status: string
+          style_preference: string | null
+          timeline_weeks: number | null
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          area_sqft?: number | null
+          assigned_supervisor?: string | null
+          assigned_thekedar?: string | null
+          budget?: number | null
+          client_name?: string | null
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          lead_id?: string | null
+          location?: string | null
+          name: string
+          property_type?: string | null
+          start_date?: string | null
+          status?: string
+          style_preference?: string | null
+          timeline_weeks?: number | null
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          area_sqft?: number | null
+          assigned_supervisor?: string | null
+          assigned_thekedar?: string | null
+          budget?: number | null
+          client_name?: string | null
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          lead_id?: string | null
           location?: string | null
           name?: string
+          property_type?: string | null
+          start_date?: string | null
           status?: string
+          style_preference?: string | null
+          timeline_weeks?: number | null
+          type?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -266,6 +402,8 @@ export type Database = {
         | "hr_manager"
         | "site_supervisor"
         | "viewer"
+        | "telecaller_manager"
+        | "telecaller"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -408,6 +546,8 @@ export const Constants = {
         "hr_manager",
         "site_supervisor",
         "viewer",
+        "telecaller_manager",
+        "telecaller",
       ],
     },
   },
