@@ -5,7 +5,7 @@ import { useAuth, roleLabel, AppRole } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import {
   LogOut, LayoutDashboard, IndianRupee, Calculator, Users, Building2,
-  ClipboardList, MapPin, Wallet, Hammer, Sofa, FileText, UserCheck, Phone, Headphones,
+  ClipboardList, MapPin, Wallet, Hammer, Sofa, FileText, UserCheck, Phone, Headphones, BarChart3, ContactRound,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -14,19 +14,26 @@ type NavItem = { to: string; label: string; icon: React.ComponentType<{ classNam
 const NAV_BY_ROLE: Record<AppRole, NavItem[]> = {
   super_admin: [
     { to: "/portal/admin", label: "Dashboard", icon: LayoutDashboard },
-    { to: "/portal/admin/pricing", label: "Material Rates", icon: IndianRupee },
-    { to: "/portal/admin/users", label: "Users & Roles", icon: Users },
+    { to: "/portal/admin/leads", label: "Leads", icon: ContactRound },
     { to: "/portal/admin/projects", label: "Projects", icon: Building2 },
+    { to: "/portal/admin/pricing", label: "Material Rates", icon: IndianRupee },
+    { to: "/portal/admin/reports", label: "Reports", icon: BarChart3 },
+    { to: "/portal/telecaller-manager", label: "Telecaller Team", icon: Headphones },
+    { to: "/portal/admin/users", label: "Users & Roles", icon: Users },
     { to: "/calculators/tiles", label: "Calculators", icon: Calculator },
   ],
   construction_head: [
     { to: "/portal/construction", label: "Dashboard", icon: LayoutDashboard },
+    { to: "/portal/admin/leads", label: "Leads", icon: ContactRound },
     { to: "/portal/admin/projects", label: "Projects", icon: Building2 },
+    { to: "/portal/admin/reports", label: "Reports", icon: BarChart3 },
     { to: "/calculators/tiles", label: "Calculators", icon: Calculator },
   ],
   interior_head: [
     { to: "/portal/interior", label: "Dashboard", icon: Sofa },
+    { to: "/portal/admin/leads", label: "Leads", icon: ContactRound },
     { to: "/portal/admin/projects", label: "Projects", icon: Building2 },
+    { to: "/portal/admin/reports", label: "Reports", icon: BarChart3 },
   ],
   field_manager: [
     { to: "/portal/field", label: "Dashboard", icon: LayoutDashboard },
@@ -48,14 +55,15 @@ const NAV_BY_ROLE: Record<AppRole, NavItem[]> = {
   ],
   telecaller_manager: [
     { to: "/portal/telecaller-manager", label: "Team Performance", icon: Headphones },
-    { to: "/portal/admin/projects", label: "Projects", icon: Building2 },
+    { to: "/portal/admin/leads", label: "All Leads", icon: ContactRound },
+    { to: "/portal/admin/reports", label: "Reports", icon: BarChart3 },
   ],
   telecaller: [
     { to: "/portal/telecaller", label: "My Leads", icon: Phone },
   ],
   viewer: [
-    { to: "/portal/viewer", label: "Reports", icon: FileText },
-    { to: "/portal/viewer", label: "Activity", icon: ClipboardList },
+    { to: "/portal/admin/reports", label: "Reports", icon: BarChart3 },
+    { to: "/portal/admin/leads", label: "Leads", icon: ContactRound },
   ],
 };
 

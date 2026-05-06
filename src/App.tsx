@@ -14,6 +14,12 @@ import PricingMaster from "./pages/portal/PricingMaster.tsx";
 import UsersAdmin from "./pages/portal/UsersAdmin.tsx";
 import ProjectsAdmin from "./pages/portal/ProjectsAdmin.tsx";
 import ProjectDetail from "./pages/portal/ProjectDetail.tsx";
+import LeadsAdmin from "./pages/portal/LeadsAdmin.tsx";
+import LeadDetail from "./pages/portal/LeadDetail.tsx";
+import TelecallerDashboard from "./pages/portal/TelecallerDashboard.tsx";
+import TelecallerManager from "./pages/portal/TelecallerManager.tsx";
+import Reports from "./pages/portal/Reports.tsx";
+import EstimationPage from "./pages/portal/EstimationPage.tsx";
 import ContractorDashboard from "./pages/portal/ContractorDashboard.tsx";
 import SubcontractorDashboard from "./pages/portal/SubcontractorDashboard.tsx";
 import MistriDashboard from "./pages/portal/MistriDashboard.tsx";
@@ -46,6 +52,12 @@ const App = () => (
             <Route path="/portal/admin/users" element={<UsersAdmin />} />
             <Route path="/portal/admin/projects" element={<ProjectsAdmin />} />
             <Route path="/portal/admin/projects/:id" element={<ProjectDetail />} />
+            <Route path="/portal/admin/leads" element={<LeadsAdmin />} />
+            <Route path="/portal/admin/reports" element={<Reports />} />
+            <Route path="/portal/leads/:id" element={<LeadDetail />} />
+            <Route path="/portal/leads/:id/estimate" element={<EstimationPage />} />
+            <Route path="/portal/telecaller" element={<TelecallerDashboard />} />
+            <Route path="/portal/telecaller-manager" element={<TelecallerManager />} />
             {/* Role-specific dashboards (reusing existing components, repurposed) */}
             <Route path="/portal/construction" element={<ContractorDashboard />} />
             <Route path="/portal/interior" element={<ContractorDashboard />} />
