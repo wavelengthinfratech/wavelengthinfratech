@@ -191,6 +191,7 @@ const PricingMaster = () => {
                   <Search className="size-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                   <Input placeholder="Search…" value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 w-48" />
                 </div>
+                <Button variant="outline" onClick={exportRateCard}><Download className="size-4" /> PDF Rate Card</Button>
               </div>
             </div>
           </CardHeader>
@@ -212,7 +213,16 @@ const PricingMaster = () => {
                     const dirty = draftVal !== undefined && draftVal !== it.rate;
                     return (
                       <tr key={it.id} className="border-b border-border/50 last:border-0">
-                        <td className="py-2 pr-4 font-medium">{it.name}</td>
+                        <td className="py-2 pr-4 font-medium">
+                          <div className="flex items-center gap-2">
+                            {it.name}
+                            {(changeMap.get(it.id) ?? 0) > 10 && (
+                              <span title={`Changed ${changeMap.get(it.id)?.toFixed(1)}% in last 7 days`} className="inline-flex items-center gap-1 text-red-600 text-xs">
+                                <AlertTriangle className="size-3" /> {changeMap.get(it.id)?.toFixed(0)}%
+                              </span>
+                            )}
+                          </div>
+                        </td>
                         <td className="py-2 pr-4 text-muted-foreground">{it.unit}</td>
                         <td className="py-2 pr-4 text-muted-foreground">{it.vendor ?? "—"}</td>
                         <td className="py-2 pr-4">
