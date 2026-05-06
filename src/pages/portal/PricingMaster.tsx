@@ -8,8 +8,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Plus, Save, Trash2 } from "lucide-react";
+import { Search, Plus, Save, Trash2, Download, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
+import { downloadPdf, BRAND_HEADER, PDF_STYLES } from "@/lib/exportPdf";
 
 interface Item {
   id: string;
@@ -44,6 +45,24 @@ const PricingMaster = () => {
       return (data ?? []) as Item[];
     },
   });
+
+  const { data: audit = [] } = useQuery({
+    queryKey: ["pricing_audit_recent"],
+    queryFn: async () => {
+      const since = new Date(Date.now() - 7 * 86400000).toISOString();
+      const { data } = await supabase.from("pricing_audit_log").select("item_id, old_rate, new_rate, changed_at").gte("changed_at", since);
+      return data ?? [];
+    },
+  });
+
+  const changeMap = new Map<string, number>();
+  for (const a of audit as any[]) {
+    if (!a.old_rate || a.old_rate === 0) continue;
+    const pct = Math.abs((a.new_rate - a.old_rate) / a.old_rate) * 100;
+    const prev = changeMap.get(a.item_id) ?? 0;
+    if (pct > prev) changeMap.set(a.item_id, pct);
+  }
+
 
   const updateRate = useMutation({
     mutationFn: async ({ id, rate }: { id: string; rate: number }) => {
@@ -101,6 +120,28 @@ const PricingMaster = () => {
     return true;
   });
 
+  const exportRateCard = () => {
+    const cats: Record<string, { name: string; rows: Item[] }> = {};
+    for (const c of categories as any[]) cats[c.id] = { name: c.name, rows: [] };
+    for (const it of filtered) if (cats[it.category_id]) cats[it.category_id].rows.push(it);
+    const content: any[] = [BRAND_HEADER(`Rate Card • ${new Date().toLocaleDateString("en-IN")}`)];
+    for (const c of Object.values(cats)) {
+      if (!c.rows.length) continue;
+      content.push({ text: c.name, fontSize: 13, bold: true, margin: [0, 10, 0, 4], color: "#1a237e" });
+      content.push({ table: { widths: ["*", 60, 80, "*"], body: [
+        [{ text: "Item", style: "th" }, { text: "Unit", style: "th" }, { text: "Rate (₹)", style: "th", alignment: "right" }, { text: "Vendor", style: "th" }],
+        ...c.rows.map((r) => [
+          { text: r.name, style: "td" }, { text: r.unit, style: "td" },
+          { text: "₹ " + Number(r.rate).toLocaleString("en-IN"), style: "td", alignment: "right" },
+          { text: r.vendor || "—", style: "td" },
+        ]),
+      ] } });
+    }
+    content.push({ text: "\nRates are indicative and may vary based on market and quantity.", fontSize: 9, italics: true, color: "#666", margin: [0, 16, 0, 0] });
+    downloadPdf({ content, styles: PDF_STYLES, defaultStyle: { fontSize: 10 } }, `wavelength-rate-card-${new Date().toISOString().slice(0, 10)}.pdf`);
+  };
+
+
   return (
     <RoleGate allow={["super_admin", "material_manager", "accounts_manager"]}>
       <PortalShell>
@@ -150,6 +191,7 @@ const PricingMaster = () => {
                   <Search className="size-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                   <Input placeholder="Search…" value={search} onChange={(e) => setSearch(e.target.value)} className="pl-9 w-48" />
                 </div>
+                <Button variant="outline" onClick={exportRateCard}><Download className="size-4" /> PDF Rate Card</Button>
               </div>
             </div>
           </CardHeader>
@@ -171,7 +213,16 @@ const PricingMaster = () => {
                     const dirty = draftVal !== undefined && draftVal !== it.rate;
                     return (
                       <tr key={it.id} className="border-b border-border/50 last:border-0">
-                        <td className="py-2 pr-4 font-medium">{it.name}</td>
+                        <td className="py-2 pr-4 font-medium">
+                          <div className="flex items-center gap-2">
+                            {it.name}
+                            {(changeMap.get(it.id) ?? 0) > 10 && (
+                              <span title={`Changed ${changeMap.get(it.id)?.toFixed(1)}% in last 7 days`} className="inline-flex items-center gap-1 text-red-600 text-xs">
+                                <AlertTriangle className="size-3" /> {changeMap.get(it.id)?.toFixed(0)}%
+                              </span>
+                            )}
+                          </div>
+                        </td>
                         <td className="py-2 pr-4 text-muted-foreground">{it.unit}</td>
                         <td className="py-2 pr-4 text-muted-foreground">{it.vendor ?? "—"}</td>
                         <td className="py-2 pr-4">
