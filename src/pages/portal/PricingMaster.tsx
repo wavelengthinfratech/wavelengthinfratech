@@ -120,6 +120,28 @@ const PricingMaster = () => {
     return true;
   });
 
+  const exportRateCard = () => {
+    const cats: Record<string, { name: string; rows: Item[] }> = {};
+    for (const c of categories as any[]) cats[c.id] = { name: c.name, rows: [] };
+    for (const it of filtered) if (cats[it.category_id]) cats[it.category_id].rows.push(it);
+    const content: any[] = [BRAND_HEADER(`Rate Card • ${new Date().toLocaleDateString("en-IN")}`)];
+    for (const c of Object.values(cats)) {
+      if (!c.rows.length) continue;
+      content.push({ text: c.name, fontSize: 13, bold: true, margin: [0, 10, 0, 4], color: "#1a237e" });
+      content.push({ table: { widths: ["*", 60, 80, "*"], body: [
+        [{ text: "Item", style: "th" }, { text: "Unit", style: "th" }, { text: "Rate (₹)", style: "th", alignment: "right" }, { text: "Vendor", style: "th" }],
+        ...c.rows.map((r) => [
+          { text: r.name, style: "td" }, { text: r.unit, style: "td" },
+          { text: "₹ " + Number(r.rate).toLocaleString("en-IN"), style: "td", alignment: "right" },
+          { text: r.vendor || "—", style: "td" },
+        ]),
+      ] } });
+    }
+    content.push({ text: "\nRates are indicative and may vary based on market and quantity.", fontSize: 9, italics: true, color: "#666", margin: [0, 16, 0, 0] });
+    downloadPdf({ content, styles: PDF_STYLES, defaultStyle: { fontSize: 10 } }, `wavelength-rate-card-${new Date().toISOString().slice(0, 10)}.pdf`);
+  };
+
+
   return (
     <RoleGate allow={["super_admin", "material_manager", "accounts_manager"]}>
       <PortalShell>
