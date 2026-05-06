@@ -46,6 +46,24 @@ const PricingMaster = () => {
     },
   });
 
+  const { data: audit = [] } = useQuery({
+    queryKey: ["pricing_audit_recent"],
+    queryFn: async () => {
+      const since = new Date(Date.now() - 7 * 86400000).toISOString();
+      const { data } = await supabase.from("pricing_audit_log").select("item_id, old_rate, new_rate, changed_at").gte("changed_at", since);
+      return data ?? [];
+    },
+  });
+
+  const changeMap = new Map<string, number>();
+  for (const a of audit as any[]) {
+    if (!a.old_rate || a.old_rate === 0) continue;
+    const pct = Math.abs((a.new_rate - a.old_rate) / a.old_rate) * 100;
+    const prev = changeMap.get(a.item_id) ?? 0;
+    if (pct > prev) changeMap.set(a.item_id, pct);
+  }
+
+
   const updateRate = useMutation({
     mutationFn: async ({ id, rate }: { id: string; rate: number }) => {
       const { error } = await supabase.from("pricing_items").update({ rate }).eq("id", id);
