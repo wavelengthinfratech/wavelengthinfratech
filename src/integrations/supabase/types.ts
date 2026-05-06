@@ -14,6 +14,84 @@ export type Database = {
   }
   public: {
     Tables: {
+      activity_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          actor_name: string | null
+          created_at: string
+          detail: string | null
+          entity_id: string | null
+          entity_type: string | null
+          id: string
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          actor_name?: string | null
+          created_at?: string
+          detail?: string | null
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          actor_name?: string | null
+          created_at?: string
+          detail?: string | null
+          entity_id?: string | null
+          entity_type?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      app_settings: {
+        Row: {
+          key: string
+          updated_at: string
+          updated_by: string | null
+          value: string
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          updated_by?: string | null
+          value: string
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          updated_by?: string | null
+          value?: string
+        }
+        Relationships: []
+      }
+      daily_targets: {
+        Row: {
+          created_at: string
+          id: string
+          target_calls: number
+          target_date: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          target_calls?: number
+          target_date?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          target_calls?: number
+          target_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       estimates: {
         Row: {
           created_at: string
@@ -51,6 +129,231 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      lead_calls: {
+        Row: {
+          call_result: string
+          caller_id: string
+          created_at: string
+          duration_minutes: number | null
+          id: string
+          lead_id: string
+          next_followup_date: string | null
+          notes: string | null
+          status_after: string | null
+          whatsapp_sent: boolean | null
+          whatsapp_template: string | null
+        }
+        Insert: {
+          call_result: string
+          caller_id: string
+          created_at?: string
+          duration_minutes?: number | null
+          id?: string
+          lead_id: string
+          next_followup_date?: string | null
+          notes?: string | null
+          status_after?: string | null
+          whatsapp_sent?: boolean | null
+          whatsapp_template?: string | null
+        }
+        Update: {
+          call_result?: string
+          caller_id?: string
+          created_at?: string
+          duration_minutes?: number | null
+          id?: string
+          lead_id?: string
+          next_followup_date?: string | null
+          notes?: string | null
+          status_after?: string | null
+          whatsapp_sent?: boolean | null
+          whatsapp_template?: string | null
+        }
+        Relationships: []
+      }
+      lead_estimations: {
+        Row: {
+          area_sqft: number
+          civil_cost: number
+          client_name: string
+          construction_type: string
+          created_at: string
+          created_by: string
+          id: string
+          labour_cost: number
+          lead_id: string | null
+          material_cost: number
+          overhead_cost: number
+          payload: Json | null
+          profit_cost: number
+          project_id: string | null
+          total_cost: number
+          valid_until: string | null
+        }
+        Insert: {
+          area_sqft: number
+          civil_cost: number
+          client_name: string
+          construction_type?: string
+          created_at?: string
+          created_by: string
+          id?: string
+          labour_cost: number
+          lead_id?: string | null
+          material_cost: number
+          overhead_cost: number
+          payload?: Json | null
+          profit_cost: number
+          project_id?: string | null
+          total_cost: number
+          valid_until?: string | null
+        }
+        Update: {
+          area_sqft?: number
+          civil_cost?: number
+          client_name?: string
+          construction_type?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          labour_cost?: number
+          lead_id?: string | null
+          material_cost?: number
+          overhead_cost?: number
+          payload?: Json | null
+          profit_cost?: number
+          project_id?: string | null
+          total_cost?: number
+          valid_until?: string | null
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          assigned_engineer: string | null
+          assigned_to: string | null
+          budget_max: number | null
+          budget_min: number | null
+          call_count: number
+          call_notes: string | null
+          construction_area: string | null
+          construction_type: string | null
+          created_at: string
+          estimated_area_sqft: number | null
+          estimation_status: string | null
+          experience: string | null
+          floors_count: number | null
+          govt_approval_status: string | null
+          id: string
+          last_call_date: string | null
+          lead_status: string
+          lead_type: string
+          location_area: string | null
+          mobile_no: string
+          name: string
+          next_followup_date: string | null
+          plot_length_ft: number | null
+          plot_width_ft: number | null
+          remark: string | null
+          site_visit_date: string | null
+          site_visit_done: boolean | null
+          soil_test_done: boolean | null
+          source: string
+          timeline_months: number | null
+          timestamp_text: string | null
+          updated_at: string
+          village_address: string | null
+          whatsapp_last_sent: string | null
+          whatsapp_opted_out: boolean
+          whatsapp_sent: boolean
+          whatsapp_sent_at: string | null
+          whatsapp_template_used: string | null
+          whatsapp_total_sent: number
+        }
+        Insert: {
+          assigned_engineer?: string | null
+          assigned_to?: string | null
+          budget_max?: number | null
+          budget_min?: number | null
+          call_count?: number
+          call_notes?: string | null
+          construction_area?: string | null
+          construction_type?: string | null
+          created_at?: string
+          estimated_area_sqft?: number | null
+          estimation_status?: string | null
+          experience?: string | null
+          floors_count?: number | null
+          govt_approval_status?: string | null
+          id?: string
+          last_call_date?: string | null
+          lead_status?: string
+          lead_type?: string
+          location_area?: string | null
+          mobile_no: string
+          name: string
+          next_followup_date?: string | null
+          plot_length_ft?: number | null
+          plot_width_ft?: number | null
+          remark?: string | null
+          site_visit_date?: string | null
+          site_visit_done?: boolean | null
+          soil_test_done?: boolean | null
+          source?: string
+          timeline_months?: number | null
+          timestamp_text?: string | null
+          updated_at?: string
+          village_address?: string | null
+          whatsapp_last_sent?: string | null
+          whatsapp_opted_out?: boolean
+          whatsapp_sent?: boolean
+          whatsapp_sent_at?: string | null
+          whatsapp_template_used?: string | null
+          whatsapp_total_sent?: number
+        }
+        Update: {
+          assigned_engineer?: string | null
+          assigned_to?: string | null
+          budget_max?: number | null
+          budget_min?: number | null
+          call_count?: number
+          call_notes?: string | null
+          construction_area?: string | null
+          construction_type?: string | null
+          created_at?: string
+          estimated_area_sqft?: number | null
+          estimation_status?: string | null
+          experience?: string | null
+          floors_count?: number | null
+          govt_approval_status?: string | null
+          id?: string
+          last_call_date?: string | null
+          lead_status?: string
+          lead_type?: string
+          location_area?: string | null
+          mobile_no?: string
+          name?: string
+          next_followup_date?: string | null
+          plot_length_ft?: number | null
+          plot_width_ft?: number | null
+          remark?: string | null
+          site_visit_date?: string | null
+          site_visit_done?: boolean | null
+          soil_test_done?: boolean | null
+          source?: string
+          timeline_months?: number | null
+          timestamp_text?: string | null
+          updated_at?: string
+          village_address?: string | null
+          whatsapp_last_sent?: string | null
+          whatsapp_opted_out?: boolean
+          whatsapp_sent?: boolean
+          whatsapp_sent_at?: string | null
+          whatsapp_template_used?: string | null
+          whatsapp_total_sent?: number
+        }
+        Relationships: []
       }
       pricing_audit_log: {
         Row: {
@@ -366,6 +669,87 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      whatsapp_logs: {
+        Row: {
+          created_at: string
+          delivered_at: string | null
+          failed_reason: string | null
+          id: string
+          lead_id: string | null
+          message_id: string | null
+          read_at: string | null
+          sent_at: string | null
+          sent_by: string | null
+          status: string
+          template_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          delivered_at?: string | null
+          failed_reason?: string | null
+          id?: string
+          lead_id?: string | null
+          message_id?: string | null
+          read_at?: string | null
+          sent_at?: string | null
+          sent_by?: string | null
+          status?: string
+          template_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          delivered_at?: string | null
+          failed_reason?: string | null
+          id?: string
+          lead_id?: string | null
+          message_id?: string | null
+          read_at?: string | null
+          sent_at?: string | null
+          sent_by?: string | null
+          status?: string
+          template_id?: string | null
+        }
+        Relationships: []
+      }
+      whatsapp_templates: {
+        Row: {
+          body: string
+          category: string
+          created_at: string
+          created_by: string | null
+          id: string
+          meta_template_name: string | null
+          name: string
+          status: string
+          updated_at: string
+          variables: Json | null
+        }
+        Insert: {
+          body: string
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          meta_template_name?: string | null
+          name: string
+          status?: string
+          updated_at?: string
+          variables?: Json | null
+        }
+        Update: {
+          body?: string
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          meta_template_name?: string | null
+          name?: string
+          status?: string
+          updated_at?: string
+          variables?: Json | null
         }
         Relationships: []
       }
